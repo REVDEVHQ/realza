@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Realza — Mouse Reveal Effect</title>
+    <title>Lando Norris — Hero Reveal Effect</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -17,618 +17,603 @@
         }
 
         :root {
-            /* Warm, earthy palette - matching Realza */
-            --cream: #f8f5f0;
-            --cream-dark: #ebe6dd;
-            --sand: #d4cbb8;
-            --terracotta: #c4704b;
-            --terracotta-dark: #a85a3a;
-            --terracotta-light: #e89b7a;
-            --clay: #8b5e3c;
-            --espresso: #2c2420;
-            --charcoal: #1a1714;
-            --ink: #0d0b0a;
-            
-            /* Typography */
-            --font-display: 'Instrument Serif', Georgia, serif;
-            --font-body: 'Syne', system-ui, sans-serif;
-            
-            /* Spacing */
-            --space-xs: 0.5rem;
-            --space-sm: 1rem;
-            --space-md: 2rem;
-            --space-lg: 4rem;
-            --space-xl: 8rem;
-            
-            /* Ease */
-            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --bg: #f5f3ef;
+            --bg-light: #faf9f7;
+            --text-dark: #1a1a1a;
+            --text-light: #666;
+            --accent: #c8ff00;
+            --accent-dark: #a8d900;
         }
 
-        html {
-            scroll-behavior: smooth;
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
         }
 
         body {
-            font-family: var(--font-body);
-            background: var(--espresso);
-            color: var(--cream);
-            overflow-x: hidden;
-            line-height: 1.5;
-            min-height: 100vh;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text-dark);
         }
 
-        /* Custom cursor */
-        .cursor {
-            width: 12px;
-            height: 12px;
-            background: var(--terracotta);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 10000;
-            mix-blend-mode: difference;
-            transition: transform 0.2s var(--ease-out);
-        }
-
-        .cursor.hover {
-            transform: scale(4);
-        }
-
-        @media (hover: none) {
-            .cursor { display: none; }
-        }
-
-        /* Navigation */
+        /* ========================================
+           NAVIGATION
+        ======================================== */
         nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            padding: var(--space-md) var(--space-lg);
+            padding: 24px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .nav-logo {
-            font-family: var(--font-display);
-            font-size: 1.8rem;
-            font-style: italic;
-            color: var(--cream);
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-
-        .nav-logo:hover { opacity: 0.7; }
-
-        .nav-tag {
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--terracotta-light);
-            background: rgba(196, 112, 75, 0.2);
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--terracotta);
-        }
-
-        /* Main Content */
-        .page-wrapper {
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: var(--space-xl) var(--space-lg);
+            line-height: 1.1;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: var(--space-lg);
-            animation: fadeIn 1s var(--ease-out);
-        }
-
-        .header-label {
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--terracotta-light);
-            margin-bottom: var(--space-sm);
-        }
-
-        .header-title {
-            font-family: var(--font-display);
-            font-size: clamp(2.5rem, 6vw, 5rem);
+        .nav-logo-first {
+            font-size: 1.4rem;
             font-weight: 400;
-            line-height: 1;
-            color: var(--cream);
-            margin-bottom: var(--space-sm);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
         }
 
-        .header-title em {
-            font-style: italic;
-            color: var(--terracotta-light);
+        .nav-logo-last {
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
         }
 
-        .header-desc {
-            font-size: 1.1rem;
-            color: var(--sand);
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.8;
+        .nav-center {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
-        /* Reveal Container */
-        .reveal-section {
-            width: 100%;
-            max-width: 800px;
-            animation: slideUp 1s var(--ease-out) 0.3s both;
+        .nav-center svg {
+            width: 32px;
+            height: 32px;
         }
 
-        .reveal-container {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 4/5;
-            border-radius: 0;
-            overflow: hidden;
-            cursor: crosshair;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .reveal-container canvas {
+        .btn-store {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 24px;
+            background: var(--accent);
+            color: var(--text-dark);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-store:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-store svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .btn-menu {
+            width: 52px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-light);
+            border: 1px solid #e0e0e0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-menu:hover {
+            background: #fff;
+        }
+
+        .btn-menu span {
             display: block;
+            width: 20px;
+            height: 2px;
+            background: var(--text-dark);
+            position: relative;
+        }
+
+        .btn-menu span::before,
+        .btn-menu span::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            left: 0;
+        }
+
+        .btn-menu span::before { top: -6px; }
+        .btn-menu span::after { top: 6px; }
+
+        /* ========================================
+           HERO SECTION
+        ======================================== */
+        .hero {
+            position: fixed;
+            inset: 0;
             width: 100%;
             height: 100%;
         }
 
-        .reveal-badge {
+        .hero-canvas {
             position: absolute;
-            bottom: var(--space-md);
-            left: var(--space-md);
-            background: var(--cream);
-            padding: var(--space-sm) var(--space-md);
+            inset: 0;
+            width: 100%;
+            height: 100%;
             z-index: 10;
-            pointer-events: none;
         }
 
-        .reveal-badge-text {
+        .hero-canvas canvas {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ========================================
+           SIDEBAR LEFT
+        ======================================== */
+        .sidebar-left {
+            position: fixed;
+            left: 40px;
+            bottom: 40px;
+            z-index: 100;
+            width: 120px;
+        }
+
+        .next-race {
+            border: 1px solid #ddd;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 16px;
+        }
+
+        .next-race-label {
             font-size: 0.65rem;
             font-weight: 700;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--terracotta);
-        }
-
-        .reveal-badge-value {
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            font-style: italic;
-            color: var(--espresso);
-        }
-
-        /* Controls */
-        .controls {
-            margin-top: var(--space-md);
-            display: flex;
-            gap: var(--space-md);
-            align-items: center;
-            flex-wrap: wrap;
-            justify-content: center;
-            animation: fadeIn 1s var(--ease-out) 0.6s both;
-        }
-
-        .control-group {
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-        }
-
-        .control-label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--sand);
-        }
-
-        input[type="range"] {
-            width: 120px;
-            height: 4px;
-            -webkit-appearance: none;
-            appearance: none;
-            background: var(--clay);
-            border-radius: 2px;
-            cursor: pointer;
-        }
-
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 16px;
-            height: 16px;
-            background: var(--terracotta);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: transform 0.2s var(--ease-out);
-        }
-
-        input[type="range"]::-webkit-slider-thumb:hover {
-            transform: scale(1.2);
-        }
-
-        .btn {
-            padding: 0.8rem 1.5rem;
-            font-family: var(--font-body);
-            font-size: 0.75rem;
-            font-weight: 600;
             letter-spacing: 0.15em;
             text-transform: uppercase;
-            border: none;
-            cursor: pointer;
-            transition: all 0.4s var(--ease-out);
+            color: var(--text-light);
+            margin-bottom: 12px;
         }
 
-        .btn-primary {
-            background: var(--terracotta);
-            color: var(--cream);
+        .next-race-track {
+            width: 60px;
+            height: 40px;
+            margin-bottom: 12px;
+            opacity: 0.3;
         }
 
-        .btn-primary:hover {
-            background: var(--terracotta-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(196, 112, 75, 0.4);
+        .next-race-name {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #eee;
         }
 
-        .btn-secondary {
-            background: transparent;
-            color: var(--cream);
-            border: 1px solid var(--clay);
-        }
-
-        .btn-secondary:hover {
-            background: var(--clay);
-            border-color: var(--clay);
-        }
-
-        .btn-secondary.active {
-            background: var(--terracotta);
-            border-color: var(--terracotta);
-        }
-
-        .mode-toggle {
+        .team-badge {
             display: flex;
-            gap: 0;
-        }
-
-        .mode-toggle .btn {
-            border-radius: 0;
-        }
-
-        /* Info Section */
-        .info-section {
-            margin-top: var(--space-xl);
-            max-width: 800px;
-            width: 100%;
-            animation: fadeIn 1s var(--ease-out) 0.9s both;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--space-md);
-            padding-top: var(--space-lg);
-            border-top: 1px solid var(--clay);
-        }
-
-        .info-item {
+            flex-direction: column;
+            align-items: center;
             text-align: center;
         }
 
-        .info-number {
-            font-family: var(--font-display);
-            font-size: 2.5rem;
-            font-style: italic;
-            color: var(--terracotta);
-            line-height: 1;
+        .team-badge svg {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 8px;
+            opacity: 0.6;
         }
 
-        .info-label {
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 0.15em;
+        .team-badge-text {
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            color: var(--sand);
-            margin-top: var(--space-xs);
+            color: var(--text-light);
+            line-height: 1.4;
         }
 
-        /* Instructions */
-        .instructions {
-            margin-top: var(--space-lg);
-            padding: var(--space-md);
-            background: var(--charcoal);
-            max-width: 800px;
+        /* ========================================
+           TOPOGRAPHIC LINES
+        ======================================== */
+        .topo-lines {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 5;
+            opacity: 0.12;
+        }
+
+        .topo-lines svg {
             width: 100%;
+            height: 100%;
         }
 
-        .instructions h3 {
-            font-family: var(--font-display);
-            font-size: 1.3rem;
-            font-style: italic;
-            color: var(--cream);
-            margin-bottom: var(--space-sm);
+        .topo {
+            fill: none;
+            stroke: #999;
+            stroke-width: 1;
         }
 
-        .instructions p {
-            font-size: 0.9rem;
-            color: var(--sand);
-            line-height: 1.8;
+        /* ========================================
+           LOADING STATE
+        ======================================== */
+        .loading {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg);
+            z-index: 9999;
+            transition: opacity 0.5s ease;
         }
 
-        .instructions code {
-            background: rgba(196, 112, 75, 0.2);
-            color: var(--terracotta-light);
-            padding: 0.2rem 0.5rem;
-            font-size: 0.85em;
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .loading-text {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-light);
         }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(60px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Responsive */
+        /* ========================================
+           RESPONSIVE
+        ======================================== */
         @media (max-width: 768px) {
-            .page-wrapper {
-                padding: var(--space-xl) var(--space-md);
-            }
-
             nav {
-                padding: var(--space-sm) var(--space-md);
+                padding: 16px 20px;
             }
 
-            .info-grid {
-                grid-template-columns: 1fr;
-                gap: var(--space-sm);
+            .nav-logo-first,
+            .nav-logo-last {
+                font-size: 1rem;
             }
 
-            .controls {
-                flex-direction: column;
+            .sidebar-left {
+                left: 20px;
+                bottom: 20px;
+                width: 100px;
             }
-        }
 
-        /* Focus styles */
-        *:focus-visible {
-            outline: 3px solid var(--terracotta);
-            outline-offset: 4px;
+            .btn-store span {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="cursor" id="cursor"></div>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <span class="loading-text">Loading...</span>
+    </div>
+
+    <!-- Topographic background lines -->
+    <div class="topo-lines">
+        <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+            <!-- Flowing organic lines -->
+            <path class="topo" d="M-100,180 Q400,130 600,230 T1000,180 T1400,260 T2000,160" />
+            <path class="topo" d="M-100,320 Q300,270 500,350 T900,290 T1300,370 T1700,310 T2100,350" />
+            <path class="topo" d="M-100,480 Q200,430 450,500 T800,460 T1150,530 T1500,470 T1850,520 T2100,480" />
+            <path class="topo" d="M-100,620 Q250,570 500,640 T850,590 T1200,670 T1550,610 T1900,650" />
+            <path class="topo" d="M-100,780 Q350,730 600,800 T950,750 T1300,830 T1650,770 T2000,810" />
+            <path class="topo" d="M-100,920 Q300,870 550,940 T900,890 T1250,970 T1600,910 T1950,950" />
+            
+            <!-- Circular/elliptical elements (like contour lines) -->
+            <ellipse class="topo" cx="150" cy="280" rx="120" ry="80" />
+            <ellipse class="topo" cx="180" cy="280" rx="180" ry="120" />
+            <ellipse class="topo" cx="220" cy="280" rx="250" ry="160" />
+            
+            <ellipse class="topo" cx="1750" cy="380" rx="140" ry="100" />
+            <ellipse class="topo" cx="1720" cy="380" rx="220" ry="150" />
+            
+            <ellipse class="topo" cx="1600" cy="800" rx="100" ry="70" />
+            <ellipse class="topo" cx="1580" cy="800" rx="160" ry="110" />
+        </svg>
+    </div>
 
     <!-- Navigation -->
     <nav>
-        <a href="#" class="nav-logo">Realza</a>
-        <span class="nav-tag">Interactive Demo</span>
+        <div class="nav-logo">
+            <span class="nav-logo-first">Lando</span>
+            <span class="nav-logo-last">Norris</span>
+        </div>
+
+        <div class="nav-center">
+            <!-- LN Logo -->
+            <svg viewBox="0 0 40 40" fill="none">
+                <path d="M8 8 L8 32 L16 32 L16 16 L24 32 L32 32 L32 8 L24 8 L24 24 L16 8 Z" fill="currentColor"/>
+            </svg>
+        </div>
+
+        <div class="nav-right">
+            <a href="#" class="btn-store">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <path d="M16 10a4 4 0 01-8 0"/>
+                </svg>
+                <span>Store</span>
+            </a>
+            <button class="btn-menu" aria-label="Menu">
+                <span></span>
+            </button>
+        </div>
     </nav>
 
-    <!-- Main Content -->
-    <div class="page-wrapper">
-        <header class="header">
-            <span class="header-label">Reveal Effect</span>
-            <h1 class="header-title">Discover the <em>Hidden</em></h1>
-            <p class="header-desc">Move your cursor across the surface to unveil the artwork beneath. A metaphor for the transformative power of marble — revealing beauty layer by layer.</p>
-        </header>
+    <!-- Left Sidebar -->
+    <div class="sidebar-left">
+        <div class="next-race">
+            <div class="next-race-label">Next Race</div>
+            
+            <!-- Melbourne track outline -->
+            <svg class="next-race-track" viewBox="0 0 100 60" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20,50 L20,20 Q20,10 30,10 L70,10 Q85,10 85,25 L85,35 Q85,50 70,50 L40,50 Q30,50 30,40 L30,30"/>
+            </svg>
 
-        <div class="reveal-section">
-            <div class="reveal-container" id="container">
-                <canvas id="canvas"></canvas>
-                <div class="reveal-badge">
-                    <div class="reveal-badge-text">Interaction</div>
-                    <div class="reveal-badge-value">Mouse Reveal</div>
-                </div>
-            </div>
+            <div class="next-race-name">Melbourne GP</div>
 
-            <div class="controls">
-                <div class="control-group">
-                    <span class="control-label">Brush: <span id="sizeValue">80</span>px</span>
-                    <input type="range" id="brushSize" min="20" max="200" value="80">
-                </div>
-                
-                <div class="mode-toggle">
-                    <button id="modeCircle" class="btn btn-secondary active">Hard Edge</button>
-                    <button id="modeSoft" class="btn btn-secondary">Soft Edge</button>
-                </div>
-                
-                <button id="resetBtn" class="btn btn-primary">Reset Canvas</button>
+            <div class="team-badge">
+                <!-- Laurel wreath badge -->
+                <svg viewBox="0 0 60 60" fill="currentColor">
+                    <circle cx="30" cy="30" r="12" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <path d="M10,50 Q15,35 20,45 Q12,40 10,50" />
+                    <path d="M15,45 Q20,30 25,42 Q17,37 15,45" />
+                    <path d="M20,40 Q25,28 28,38 Q22,34 20,40" />
+                    <path d="M50,50 Q45,35 40,45 Q48,40 50,50" />
+                    <path d="M45,45 Q40,30 35,42 Q43,37 45,45" />
+                    <path d="M40,40 Q35,28 32,38 Q38,34 40,40" />
+                </svg>
+                <span class="team-badge-text">McLaren F1<br/>Since 2019</span>
             </div>
         </div>
+    </div>
 
-        <div class="info-section">
-            <div class="info-grid">
-                <div class="info-item">
-                    <div class="info-number">01</div>
-                    <div class="info-label">Hover to Reveal</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-number">02</div>
-                    <div class="info-label">Adjust Brush Size</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-number">03</div>
-                    <div class="info-label">Reset Anytime</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="instructions">
-            <h3>Integration Guide</h3>
-            <p>
-                To use with your own images, replace <code>BASE_IMAGE</code> and <code>REVEAL_IMAGE</code> 
-                URLs in the script below. Both images should have the same dimensions for best results. 
-                This effect works beautifully for before/after reveals, product showcases, or artistic unveilings.
-            </p>
+    <!-- Hero Canvas -->
+    <div class="hero">
+        <div class="hero-canvas" id="hero-canvas">
+            <canvas id="canvas"></canvas>
         </div>
     </div>
 
     <script>
         // ===========================================
-        // CONFIGURATION - Replace with your images!
+        // CONFIGURATION
         // ===========================================
-        // Use direct image URLs or local paths like '/images/base.png'
-        const BASE_IMAGE = 'https://github.com/user-attachments/assets/8996d772-9a7d-4dda-87ad-1eb34bfda62a';
-        const REVEAL_IMAGE = 'https://github.com/user-attachments/assets/7cc59ceb-2dbf-45fc-8044-a4c931a44e12';
+        // Replace these with your actual image paths
+        const BASE_IMAGE = 'base.png';      // Plain version
+        const REVEAL_IMAGE = 'reveal.png';  // Helmet version
+        
+        const BRUSH_SIZE = 100;  // Size of reveal brush
+        const BRUSH_SOFTNESS = 0.6; // 0 = hard edge, 1 = very soft
         
         // ===========================================
-        // MAIN CODE
+        // CANVAS SETUP
         // ===========================================
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
-        const container = document.getElementById('container');
+        const container = document.getElementById('hero-canvas');
+        const loading = document.getElementById('loading');
         
-        // Create mask canvas (tracks revealed areas)
+        // Mask canvas for accumulating brush strokes
         const maskCanvas = document.createElement('canvas');
         const maskCtx = maskCanvas.getContext('2d');
         
-        // Image storage
         let baseImage = null;
         let revealImage = null;
         let isLoaded = false;
+        let animationFrame = null;
         
-        // Settings
-        let brushSize = 80;
-        let brushMode = 'circle'; // 'circle' or 'soft'
+        // Image draw parameters (for cover fit)
+        let drawParams = { x: 0, y: 0, width: 0, height: 0 };
         
-        // Set canvas size
-        function setCanvasSize(width, height) {
-            canvas.width = width;
-            canvas.height = height;
-            maskCanvas.width = width;
-            maskCanvas.height = height;
+        // ===========================================
+        // RESIZE HANDLING
+        // ===========================================
+        function resize() {
+            const dpr = window.devicePixelRatio || 1;
+            const rect = container.getBoundingClientRect();
+            
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            canvas.style.width = rect.width + 'px';
+            canvas.style.height = rect.height + 'px';
+            
+            maskCanvas.width = rect.width;
+            maskCanvas.height = rect.height;
+            
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            
+            if (isLoaded) {
+                calculateDrawParams();
+                draw();
+            }
         }
-
-        // Create demo images (used when no real images load)
-        function createDemoImages() {
-            const width = 800;
-            const height = 1000;
-            setCanvasSize(width, height);
+        
+        // Calculate how to draw images to cover container
+        function calculateDrawParams() {
+            const rect = container.getBoundingClientRect();
+            const imgAspect = baseImage.width / baseImage.height;
+            const containerAspect = rect.width / rect.height;
             
-            // Create base image - dark marble theme
-            const baseCanvas = document.createElement('canvas');
-            baseCanvas.width = width;
-            baseCanvas.height = height;
-            const baseCtx = baseCanvas.getContext('2d');
+            if (containerAspect > imgAspect) {
+                // Container is wider - fit to width
+                drawParams.width = rect.width;
+                drawParams.height = rect.width / imgAspect;
+                drawParams.x = 0;
+                drawParams.y = (rect.height - drawParams.height) / 2;
+            } else {
+                // Container is taller - fit to height
+                drawParams.height = rect.height;
+                drawParams.width = rect.height * imgAspect;
+                drawParams.x = (rect.width - drawParams.width) / 2;
+                drawParams.y = 0;
+            }
+        }
+        
+        // ===========================================
+        // DRAWING
+        // ===========================================
+        function draw() {
+            if (!isLoaded) return;
             
-            // Dark gradient background
-            const grad1 = baseCtx.createLinearGradient(0, 0, width, height);
-            grad1.addColorStop(0, '#1a1714');
-            grad1.addColorStop(0.5, '#2c2420');
-            grad1.addColorStop(1, '#0d0b0a');
-            baseCtx.fillStyle = grad1;
-            baseCtx.fillRect(0, 0, width, height);
+            const rect = container.getBoundingClientRect();
+            const { x, y, width, height } = drawParams;
             
-            // Add marble-like veins
-            baseCtx.strokeStyle = 'rgba(212, 203, 184, 0.1)';
-            baseCtx.lineWidth = 2;
-            for (let i = 0; i < 15; i++) {
-                baseCtx.beginPath();
-                baseCtx.moveTo(Math.random() * width, 0);
-                baseCtx.bezierCurveTo(
-                    Math.random() * width, height * 0.33,
-                    Math.random() * width, height * 0.66,
-                    Math.random() * width, height
-                );
-                baseCtx.stroke();
+            // Clear canvas
+            ctx.clearRect(0, 0, rect.width, rect.height);
+            
+            // Draw base image (covers entire canvas)
+            ctx.drawImage(baseImage, x, y, width, height);
+            
+            // Create temp canvas for masked reveal
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = rect.width;
+            tempCanvas.height = rect.height;
+            const tempCtx = tempCanvas.getContext('2d');
+            
+            // Draw mask to temp
+            tempCtx.drawImage(maskCanvas, 0, 0);
+            
+            // Use source-in to keep only parts of reveal where mask is white
+            tempCtx.globalCompositeOperation = 'source-in';
+            tempCtx.drawImage(revealImage, x, y, width, height);
+            
+            // Draw the masked reveal on top of base
+            ctx.drawImage(tempCanvas, 0, 0);
+        }
+        
+        // Paint brush stroke on mask
+        function paint(mouseX, mouseY) {
+            if (!isLoaded) return;
+            
+            // Create soft radial gradient brush
+            const gradient = maskCtx.createRadialGradient(
+                mouseX, mouseY, 0,
+                mouseX, mouseY, BRUSH_SIZE
+            );
+            
+            gradient.addColorStop(0, 'rgba(255,255,255,1)');
+            gradient.addColorStop(1 - BRUSH_SOFTNESS, 'rgba(255,255,255,0.5)');
+            gradient.addColorStop(1, 'rgba(255,255,255,0)');
+            
+            maskCtx.fillStyle = gradient;
+            maskCtx.beginPath();
+            maskCtx.arc(mouseX, mouseY, BRUSH_SIZE, 0, Math.PI * 2);
+            maskCtx.fill();
+            
+            draw();
+        }
+        
+        // ===========================================
+        // EVENT HANDLERS
+        // ===========================================
+        let lastX = 0, lastY = 0;
+        
+        function handlePointerMove(e) {
+            const rect = container.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // Interpolate between last position and current for smooth lines
+            const dx = x - lastX;
+            const dy = y - lastY;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            
+            if (dist > 5) {
+                const steps = Math.ceil(dist / 10);
+                for (let i = 0; i <= steps; i++) {
+                    const t = i / steps;
+                    const interpX = lastX + dx * t;
+                    const interpY = lastY + dy * t;
+                    paint(interpX, interpY);
+                }
+            } else {
+                paint(x, y);
             }
             
-            // Text
-            baseCtx.fillStyle = '#f8f5f0';
-            baseCtx.font = 'italic 64px "Instrument Serif", Georgia, serif';
-            baseCtx.textAlign = 'center';
-            baseCtx.fillText('Hover to', width/2, height/2 - 40);
-            baseCtx.fillStyle = '#e89b7a';
-            baseCtx.fillText('Reveal', width/2, height/2 + 40);
-            
-            // Create reveal image - warm terracotta theme
-            const revealCanvas = document.createElement('canvas');
-            revealCanvas.width = width;
-            revealCanvas.height = height;
-            const revealCtx = revealCanvas.getContext('2d');
-            
-            // Warm gradient
-            const grad2 = revealCtx.createLinearGradient(0, 0, width, height);
-            grad2.addColorStop(0, '#c4704b');
-            grad2.addColorStop(0.5, '#e89b7a');
-            grad2.addColorStop(1, '#a85a3a');
-            revealCtx.fillStyle = grad2;
-            revealCtx.fillRect(0, 0, width, height);
-            
-            // Add decorative circles
-            revealCtx.fillStyle = 'rgba(248, 245, 240, 0.15)';
-            for (let i = 0; i < 25; i++) {
-                const x = Math.random() * width;
-                const y = Math.random() * height;
-                const size = 30 + Math.random() * 80;
-                revealCtx.beginPath();
-                revealCtx.arc(x, y, size, 0, Math.PI * 2);
-                revealCtx.fill();
-            }
-            
-            // Text
-            revealCtx.fillStyle = '#f8f5f0';
-            revealCtx.font = 'italic 72px "Instrument Serif", Georgia, serif';
-            revealCtx.textAlign = 'center';
-            revealCtx.fillText('Realza', width/2, height/2);
-            revealCtx.font = '600 18px "Syne", sans-serif';
-            revealCtx.letterSpacing = '0.2em';
-            revealCtx.fillText('MARBLE ELEVATED TO ART', width/2, height/2 + 50);
-            
-            // Convert to images
-            baseImage = new Image();
-            revealImage = new Image();
-            
-            baseImage.onload = () => {
-                revealImage.onload = () => {
-                    isLoaded = true;
-                    draw();
-                };
-                revealImage.src = revealCanvas.toDataURL();
-            };
-            baseImage.src = baseCanvas.toDataURL();
+            lastX = x;
+            lastY = y;
         }
-
-        // Try to load real images, fall back to demo
+        
+        container.addEventListener('mousemove', handlePointerMove);
+        
+        container.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const rect = container.getBoundingClientRect();
+            const x = touch.clientX - rect.left;
+            const y = touch.clientY - rect.top;
+            paint(x, y);
+            lastX = x;
+            lastY = y;
+        }, { passive: false });
+        
+        container.addEventListener('touchstart', (e) => {
+            const touch = e.touches[0];
+            const rect = container.getBoundingClientRect();
+            lastX = touch.clientX - rect.left;
+            lastY = touch.clientY - rect.top;
+        });
+        
+        // ===========================================
+        // IMAGE LOADING
+        // ===========================================
         function loadImages() {
             baseImage = new Image();
             revealImage = new Image();
-            baseImage.crossOrigin = 'anonymous';
-            revealImage.crossOrigin = 'anonymous';
             
             let loadCount = 0;
-            let errorCount = 0;
             
             const onLoad = () => {
                 loadCount++;
                 if (loadCount === 2) {
-                    setCanvasSize(baseImage.width, baseImage.height);
                     isLoaded = true;
+                    loading.classList.add('hidden');
+                    calculateDrawParams();
                     draw();
                 }
             };
             
             const onError = () => {
-                errorCount++;
-                if (errorCount >= 1) {
-                    console.log('Image load failed, using demo images');
-                    createDemoImages();
-                }
+                console.error('Failed to load images. Make sure base.png and reveal.png are in the same folder.');
+                loading.innerHTML = '<span class="loading-text">Failed to load images</span>';
             };
             
             baseImage.onload = onLoad;
@@ -638,169 +623,13 @@
             
             baseImage.src = BASE_IMAGE;
             revealImage.src = REVEAL_IMAGE;
-            
-            // Timeout fallback
-            setTimeout(() => {
-                if (!isLoaded && errorCount === 0) {
-                    createDemoImages();
-                }
-            }, 5000);
         }
-
-        // Draw the composited result
-        function draw() {
-            if (!isLoaded) return;
-            
-            // Draw base image
-            ctx.drawImage(baseImage, 0, 0);
-            
-            // Create temp canvas for masked reveal
-            const tempCanvas = document.createElement('canvas');
-            tempCanvas.width = canvas.width;
-            tempCanvas.height = canvas.height;
-            const tempCtx = tempCanvas.getContext('2d');
-            
-            // Draw mask, then reveal image using source-in
-            tempCtx.drawImage(maskCanvas, 0, 0);
-            tempCtx.globalCompositeOperation = 'source-in';
-            tempCtx.drawImage(revealImage, 0, 0);
-            
-            // Draw masked reveal on top
-            ctx.drawImage(tempCanvas, 0, 0);
-        }
-
-        // Paint on mask at position
-        function paint(x, y) {
-            if (!isLoaded) return;
-            
-            if (brushMode === 'soft') {
-                // Soft edge brush using radial gradient
-                const gradient = maskCtx.createRadialGradient(x, y, 0, x, y, brushSize);
-                gradient.addColorStop(0, 'rgba(255,255,255,1)');
-                gradient.addColorStop(0.5, 'rgba(255,255,255,0.5)');
-                gradient.addColorStop(1, 'rgba(255,255,255,0)');
-                maskCtx.fillStyle = gradient;
-                maskCtx.beginPath();
-                maskCtx.arc(x, y, brushSize, 0, Math.PI * 2);
-                maskCtx.fill();
-            } else {
-                // Hard circle brush
-                maskCtx.fillStyle = 'white';
-                maskCtx.beginPath();
-                maskCtx.arc(x, y, brushSize, 0, Math.PI * 2);
-                maskCtx.fill();
-            }
-            
-            draw();
-        }
-
-        // Get position from event (mouse or touch)
-        function getPosition(e) {
-            const rect = canvas.getBoundingClientRect();
-            const scaleX = canvas.width / rect.width;
-            const scaleY = canvas.height / rect.height;
-            
-            let clientX, clientY;
-            if (e.touches) {
-                clientX = e.touches[0].clientX;
-                clientY = e.touches[0].clientY;
-            } else {
-                clientX = e.clientX;
-                clientY = e.clientY;
-            }
-            
-            return {
-                x: (clientX - rect.left) * scaleX,
-                y: (clientY - rect.top) * scaleY
-            };
-        }
-
-        // Event handlers
-        let isDrawing = false;
-
-        container.addEventListener('mousedown', (e) => {
-            isDrawing = true;
-            const pos = getPosition(e);
-            paint(pos.x, pos.y);
-        });
-
-        container.addEventListener('mousemove', (e) => {
-            // Paint on hover (not just drag)
-            const pos = getPosition(e);
-            paint(pos.x, pos.y);
-        });
-
-        container.addEventListener('mouseup', () => isDrawing = false);
-        container.addEventListener('mouseleave', () => isDrawing = false);
-
-        // Touch support
-        container.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            isDrawing = true;
-            const pos = getPosition(e);
-            paint(pos.x, pos.y);
-        });
-
-        container.addEventListener('touchmove', (e) => {
-            e.preventDefault();
-            if (isDrawing) {
-                const pos = getPosition(e);
-                paint(pos.x, pos.y);
-            }
-        });
-
-        container.addEventListener('touchend', () => isDrawing = false);
-
-        // Controls
-        document.getElementById('brushSize').addEventListener('input', (e) => {
-            brushSize = parseInt(e.target.value);
-            document.getElementById('sizeValue').textContent = brushSize;
-        });
-
-        document.getElementById('resetBtn').addEventListener('click', () => {
-            maskCtx.clearRect(0, 0, maskCanvas.width, maskCanvas.height);
-            draw();
-        });
-
-        document.getElementById('modeCircle').addEventListener('click', () => {
-            brushMode = 'circle';
-            document.getElementById('modeCircle').classList.add('active');
-            document.getElementById('modeSoft').classList.remove('active');
-        });
-
-        document.getElementById('modeSoft').addEventListener('click', () => {
-            brushMode = 'soft';
-            document.getElementById('modeSoft').classList.add('active');
-            document.getElementById('modeCircle').classList.remove('active');
-        });
-
-        // Custom cursor
-        const cursor = document.getElementById('cursor');
-        let cursorX = 0, cursorY = 0;
-        let currentX = 0, currentY = 0;
-
-        if (window.matchMedia('(hover: hover)').matches) {
-            document.addEventListener('mousemove', (e) => {
-                cursorX = e.clientX;
-                cursorY = e.clientY;
-            });
-
-            function animateCursor() {
-                currentX += (cursorX - currentX) * 0.15;
-                currentY += (cursorY - currentY) * 0.15;
-                cursor.style.left = currentX + 'px';
-                cursor.style.top = currentY + 'px';
-                requestAnimationFrame(animateCursor);
-            }
-            animateCursor();
-
-            document.querySelectorAll('a, button, .reveal-container').forEach(el => {
-                el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-                el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-            });
-        }
-
-        // Initialize
+        
+        // ===========================================
+        // INITIALIZE
+        // ===========================================
+        window.addEventListener('resize', resize);
+        resize();
         loadImages();
     </script>
 </body>
