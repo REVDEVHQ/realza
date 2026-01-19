@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Realza by Chetak Grani Marmo - Marble elevated to art. Luxury surfaces, sculptural creations, and bespoke spaces for visionary architects and designers.">
-    <title>Realza — Marble Elevated to Art</title>
+    <title>Realza — Mouse Reveal Effect</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +17,7 @@
         }
 
         :root {
-            /* Warm, earthy palette */
+            /* Warm, earthy palette - matching Realza */
             --cream: #f8f5f0;
             --cream-dark: #ebe6dd;
             --sand: #d4cbb8;
@@ -40,32 +39,22 @@
             --space-md: 2rem;
             --space-lg: 4rem;
             --space-xl: 8rem;
-            --space-2xl: 12rem;
             
             /* Ease */
             --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-            --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         html {
             scroll-behavior: smooth;
         }
 
-        @media (prefers-reduced-motion: reduce) {
-            html { scroll-behavior: auto; }
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
         body {
             font-family: var(--font-body);
-            background: var(--cream);
-            color: var(--espresso);
+            background: var(--espresso);
+            color: var(--cream);
             overflow-x: hidden;
             line-height: 1.5;
-            cursor: default;
+            min-height: 100vh;
         }
 
         /* Custom cursor */
@@ -89,24 +78,7 @@
             .cursor { display: none; }
         }
 
-        /* Skip link */
-        .skip-link {
-            position: absolute;
-            top: -100%;
-            left: var(--space-md);
-            background: var(--terracotta);
-            color: var(--cream);
-            padding: var(--space-sm) var(--space-md);
-            text-decoration: none;
-            z-index: 10001;
-            transition: top 0.3s;
-        }
-
-        .skip-link:focus { top: var(--space-md); }
-
-        /* ========================================
-           NAVIGATION
-        ======================================== */
+        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -117,11 +89,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            mix-blend-mode: difference;
-        }
-
-        nav.light-mode {
-            mix-blend-mode: normal;
         }
 
         .nav-logo {
@@ -133,195 +100,279 @@
             transition: opacity 0.3s;
         }
 
-        nav.light-mode .nav-logo {
-            color: var(--espresso);
-        }
-
         .nav-logo:hover { opacity: 0.7; }
 
-        .nav-links {
-            display: flex;
-            gap: var(--space-lg);
-            list-style: none;
-        }
-
-        .nav-links a {
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            color: var(--cream);
-            text-decoration: none;
-            position: relative;
-            padding: var(--space-xs) 0;
-        }
-
-        nav.light-mode .nav-links a {
-            color: var(--espresso);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: currentColor;
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.4s var(--ease-out);
-        }
-
-        .nav-links a:hover::after,
-        .nav-links a:focus-visible::after {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-
-        /* Mobile menu */
-        .menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            position: relative;
-            z-index: 1001;
-        }
-
-        .menu-btn span {
-            display: block;
-            width: 100%;
-            height: 2px;
-            background: var(--cream);
-            position: absolute;
-            left: 0;
-            transition: all 0.3s var(--ease-out);
-        }
-
-        nav.light-mode .menu-btn span {
-            background: var(--espresso);
-        }
-
-        .menu-btn span:nth-child(1) { top: 12px; }
-        .menu-btn span:nth-child(2) { top: 19px; }
-        .menu-btn span:nth-child(3) { top: 26px; }
-
-        .menu-btn.active span:nth-child(1) {
-            top: 19px;
-            transform: rotate(45deg);
-        }
-
-        .menu-btn.active span:nth-child(2) { opacity: 0; }
-
-        .menu-btn.active span:nth-child(3) {
-            top: 19px;
-            transform: rotate(-45deg);
-        }
-
-        /* ========================================
-           HERO - FULL BLEED IMAGE
-        ======================================== */
-        .hero {
-            height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: flex-end;
-            overflow: hidden;
-        }
-
-        .hero-image {
-            position: absolute;
-            inset: 0;
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                to top,
-                rgba(13, 11, 10, 0.9) 0%,
-                rgba(13, 11, 10, 0.3) 40%,
-                transparent 70%
-            );
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            padding: var(--space-xl) var(--space-lg);
-            max-width: 900px;
-        }
-
-        .hero-tag {
-            display: inline-block;
-            font-size: 0.75rem;
+        .nav-tag {
+            font-size: 0.7rem;
             font-weight: 600;
             letter-spacing: 0.2em;
             text-transform: uppercase;
             color: var(--terracotta-light);
             background: rgba(196, 112, 75, 0.2);
-            padding: 0.6rem 1.2rem;
-            margin-bottom: var(--space-md);
+            padding: 0.5rem 1rem;
             border: 1px solid var(--terracotta);
-            animation: fadeIn 1s var(--ease-out) 0.3s both;
         }
 
-        .hero-title {
+        /* Main Content */
+        .page-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: var(--space-xl) var(--space-lg);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+            animation: fadeIn 1s var(--ease-out);
+        }
+
+        .header-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--terracotta-light);
+            margin-bottom: var(--space-sm);
+        }
+
+        .header-title {
             font-family: var(--font-display);
-            font-size: clamp(4rem, 12vw, 10rem);
+            font-size: clamp(2.5rem, 6vw, 5rem);
             font-weight: 400;
-            line-height: 0.9;
+            line-height: 1;
             color: var(--cream);
-            margin-bottom: var(--space-md);
-            animation: slideUp 1.2s var(--ease-out) 0.5s both;
+            margin-bottom: var(--space-sm);
         }
 
-        .hero-title em {
+        .header-title em {
             font-style: italic;
-            display: block;
             color: var(--terracotta-light);
         }
 
-        .hero-desc {
+        .header-desc {
             font-size: 1.1rem;
             color: var(--sand);
-            max-width: 500px;
+            max-width: 600px;
+            margin: 0 auto;
             line-height: 1.8;
-            animation: fadeIn 1s var(--ease-out) 0.8s both;
         }
 
-        .hero-scroll {
+        /* Reveal Container */
+        .reveal-section {
+            width: 100%;
+            max-width: 800px;
+            animation: slideUp 1s var(--ease-out) 0.3s both;
+        }
+
+        .reveal-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4/5;
+            border-radius: 0;
+            overflow: hidden;
+            cursor: crosshair;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .reveal-container canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .reveal-badge {
             position: absolute;
-            bottom: var(--space-lg);
-            right: var(--space-lg);
-            writing-mode: vertical-rl;
-            font-size: 0.7rem;
-            letter-spacing: 0.3em;
+            bottom: var(--space-md);
+            left: var(--space-md);
+            background: var(--cream);
+            padding: var(--space-sm) var(--space-md);
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .reveal-badge-text {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
-            color: var(--cream);
+            color: var(--terracotta);
+        }
+
+        .reveal-badge-value {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--espresso);
+        }
+
+        /* Controls */
+        .controls {
+            margin-top: var(--space-md);
+            display: flex;
+            gap: var(--space-md);
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeIn 1s var(--ease-out) 0.6s both;
+        }
+
+        .control-group {
             display: flex;
             align-items: center;
             gap: var(--space-sm);
-            animation: fadeIn 1s var(--ease-out) 1s both;
         }
 
-        .hero-scroll::before {
-            content: '';
-            width: 1px;
-            height: 80px;
-            background: linear-gradient(to bottom, var(--terracotta), transparent);
-            animation: scrollLine 2s ease-in-out infinite;
+        .control-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--sand);
         }
 
+        input[type="range"] {
+            width: 120px;
+            height: 4px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: var(--clay);
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--terracotta);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s var(--ease-out);
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s var(--ease-out);
+        }
+
+        .btn-primary {
+            background: var(--terracotta);
+            color: var(--cream);
+        }
+
+        .btn-primary:hover {
+            background: var(--terracotta-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(196, 112, 75, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--cream);
+            border: 1px solid var(--clay);
+        }
+
+        .btn-secondary:hover {
+            background: var(--clay);
+            border-color: var(--clay);
+        }
+
+        .btn-secondary.active {
+            background: var(--terracotta);
+            border-color: var(--terracotta);
+        }
+
+        .mode-toggle {
+            display: flex;
+            gap: 0;
+        }
+
+        .mode-toggle .btn {
+            border-radius: 0;
+        }
+
+        /* Info Section */
+        .info-section {
+            margin-top: var(--space-xl);
+            max-width: 800px;
+            width: 100%;
+            animation: fadeIn 1s var(--ease-out) 0.9s both;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+            padding-top: var(--space-lg);
+            border-top: 1px solid var(--clay);
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-number {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-style: italic;
+            color: var(--terracotta);
+            line-height: 1;
+        }
+
+        .info-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--sand);
+            margin-top: var(--space-xs);
+        }
+
+        /* Instructions */
+        .instructions {
+            margin-top: var(--space-lg);
+            padding: var(--space-md);
+            background: var(--charcoal);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .instructions h3 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--cream);
+            margin-bottom: var(--space-sm);
+        }
+
+        .instructions p {
+            font-size: 0.9rem;
+            color: var(--sand);
+            line-height: 1.8;
+        }
+
+        .instructions code {
+            background: rgba(196, 112, 75, 0.2);
+            color: var(--terracotta-light);
+            padding: 0.2rem 0.5rem;
+            font-size: 0.85em;
+        }
+
+        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -332,958 +383,23 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes scrollLine {
-            0%, 100% { transform: scaleY(1); opacity: 0.5; }
-            50% { transform: scaleY(1.3); opacity: 1; }
-        }
-
-        /* ========================================
-           MARQUEE
-        ======================================== */
-        .marquee {
-            background: var(--terracotta);
-            padding: var(--space-sm) 0;
-            overflow: hidden;
-        }
-
-        .marquee-track {
-            display: flex;
-            animation: marquee 30s linear infinite;
-        }
-
-        .marquee-item {
-            flex-shrink: 0;
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            font-style: italic;
-            color: var(--cream);
-            padding: 0 var(--space-lg);
-            display: flex;
-            align-items: center;
-            gap: var(--space-lg);
-        }
-
-        .marquee-item::after {
-            content: '◆';
-            font-size: 0.6rem;
-        }
-
-        @keyframes marquee {
-            to { transform: translateX(-50%); }
-        }
-
-        /* ========================================
-           INTRO SECTION
-        ======================================== */
-        .intro {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 100vh;
-        }
-
-        .intro-left {
-            background: var(--cream-dark);
-            padding: var(--space-2xl) var(--space-xl);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .intro-label {
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--terracotta);
-            margin-bottom: var(--space-md);
-        }
-
-        .intro-title {
-            font-family: var(--font-display);
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 400;
-            line-height: 1.1;
-            color: var(--espresso);
-            margin-bottom: var(--space-md);
-        }
-
-        .intro-title em {
-            font-style: italic;
-            color: var(--terracotta);
-        }
-
-        .intro-text {
-            font-size: 1.05rem;
-            color: var(--clay);
-            line-height: 1.9;
-            margin-bottom: var(--space-md);
-        }
-
-        .intro-text strong {
-            color: var(--espresso);
-            font-weight: 600;
-        }
-
-        .intro-stats {
-            display: flex;
-            gap: var(--space-xl);
-            margin-top: var(--space-lg);
-            padding-top: var(--space-lg);
-            border-top: 1px solid var(--sand);
-        }
-
-        .stat-item {
-            text-align: left;
-        }
-
-        .stat-number {
-            font-family: var(--font-display);
-            font-size: 3.5rem;
-            font-style: italic;
-            color: var(--terracotta);
-            line-height: 1;
-        }
-
-        .stat-label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--clay);
-            margin-top: var(--space-xs);
-        }
-
-        .intro-right {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .intro-right img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s var(--ease-out);
-        }
-
-        .intro-right:hover img {
-            transform: scale(1.05);
-        }
-
-        .intro-badge {
-            position: absolute;
-            bottom: var(--space-lg);
-            left: var(--space-lg);
-            background: var(--cream);
-            padding: var(--space-md) var(--space-lg);
-        }
-
-        .intro-badge-text {
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--terracotta);
-        }
-
-        .intro-badge-value {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-style: italic;
-            color: var(--espresso);
-        }
-
-        /* ========================================
-           SERVICES - HORIZONTAL CARDS
-        ======================================== */
-        .services {
-            padding: var(--space-2xl) 0;
-            background: var(--espresso);
-            overflow: hidden;
-        }
-
-        .services-header {
-            padding: 0 var(--space-lg);
-            margin-bottom: var(--space-xl);
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            flex-wrap: wrap;
-            gap: var(--space-md);
-        }
-
-        .services-title {
-            font-family: var(--font-display);
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 400;
-            color: var(--cream);
-        }
-
-        .services-title em {
-            font-style: italic;
-            color: var(--terracotta-light);
-        }
-
-        .services-nav {
-            display: flex;
-            gap: var(--space-sm);
-        }
-
-        .services-nav button {
-            width: 50px;
-            height: 50px;
-            border: 1px solid var(--clay);
-            background: transparent;
-            color: var(--cream);
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s var(--ease-out);
-        }
-
-        .services-nav button:hover {
-            background: var(--terracotta);
-            border-color: var(--terracotta);
-        }
-
-        .services-track {
-            display: flex;
-            gap: var(--space-md);
-            padding: 0 var(--space-lg);
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-
-        .services-track::-webkit-scrollbar { display: none; }
-
-        .service-card {
-            flex: 0 0 400px;
-            background: var(--charcoal);
-            scroll-snap-align: start;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.5s var(--ease-out);
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .service-image {
-            height: 300px;
-            overflow: hidden;
-        }
-
-        .service-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s var(--ease-out);
-        }
-
-        .service-card:hover .service-image img {
-            transform: scale(1.1);
-        }
-
-        .service-content {
-            padding: var(--space-lg);
-        }
-
-        .service-number {
-            font-family: var(--font-display);
-            font-size: 4rem;
-            font-style: italic;
-            color: var(--terracotta);
-            line-height: 1;
-            opacity: 0.5;
-            margin-bottom: var(--space-sm);
-        }
-
-        .service-title {
-            font-family: var(--font-display);
-            font-size: 1.8rem;
-            color: var(--cream);
-            margin-bottom: var(--space-xs);
-        }
-
-        .service-subtitle {
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--terracotta-light);
-            margin-bottom: var(--space-sm);
-        }
-
-        .service-desc {
-            font-size: 0.95rem;
-            color: var(--sand);
-            line-height: 1.7;
-        }
-
-        /* ========================================
-           GALLERY - MASONRY STYLE
-        ======================================== */
-        .gallery {
-            padding: var(--space-2xl) var(--space-lg);
-            background: var(--cream);
-        }
-
-        .gallery-header {
-            text-align: center;
-            margin-bottom: var(--space-xl);
-        }
-
-        .gallery-label {
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--terracotta);
-            margin-bottom: var(--space-sm);
-        }
-
-        .gallery-title {
-            font-family: var(--font-display);
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 400;
-            color: var(--espresso);
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            grid-auto-rows: 100px;
-            gap: var(--space-sm);
-        }
-
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s var(--ease-out);
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .gallery-item::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(44, 36, 32, 0.95), transparent 60%);
-            opacity: 0;
-            transition: opacity 0.5s var(--ease-out);
-            z-index: 1;
-        }
-
-        .gallery-item:hover::before {
-            opacity: 1;
-        }
-
-        .gallery-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: var(--space-md);
-            z-index: 2;
-            transform: translateY(100%);
-            transition: transform 0.5s var(--ease-out);
-        }
-
-        .gallery-item:hover .gallery-caption {
-            transform: translateY(0);
-        }
-
-        .gallery-caption h3 {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-style: italic;
-            color: var(--cream);
-        }
-
-        .gallery-caption p {
-            font-size: 0.75rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--terracotta-light);
-        }
-
-        /* Grid positioning */
-        .gallery-item-1 { grid-column: span 5; grid-row: span 5; }
-        .gallery-item-2 { grid-column: span 4; grid-row: span 3; }
-        .gallery-item-3 { grid-column: span 3; grid-row: span 3; }
-        .gallery-item-4 { grid-column: span 4; grid-row: span 2; }
-        .gallery-item-5 { grid-column: span 3; grid-row: span 2; }
-        .gallery-item-6 { grid-column: span 5; grid-row: span 3; }
-
-        /* ========================================
-           PROCESS - TIMELINE
-        ======================================== */
-        .process {
-            padding: var(--space-2xl) var(--space-lg);
-            background: var(--cream-dark);
-            position: relative;
-        }
-
-        .process-header {
-            text-align: center;
-            margin-bottom: var(--space-xl);
-        }
-
-        .process-title {
-            font-family: var(--font-display);
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 400;
-            color: var(--espresso);
-        }
-
-        .process-timeline {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: var(--space-md);
-            position: relative;
-        }
-
-        .process-timeline::before {
-            content: '';
-            position: absolute;
-            top: 60px;
-            left: 10%;
-            right: 10%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--terracotta), transparent);
-        }
-
-        .process-step {
-            text-align: center;
-            position: relative;
-        }
-
-        .step-icon {
-            width: 120px;
-            height: 120px;
-            border: 2px solid var(--terracotta);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto var(--space-md);
-            background: var(--cream-dark);
-            position: relative;
-            z-index: 2;
-            transition: all 0.5s var(--ease-out);
-        }
-
-        .process-step:hover .step-icon {
-            background: var(--terracotta);
-            transform: scale(1.1);
-        }
-
-        .step-icon span {
-            font-family: var(--font-display);
-            font-size: 2.5rem;
-            font-style: italic;
-            color: var(--terracotta);
-            transition: color 0.5s var(--ease-out);
-        }
-
-        .process-step:hover .step-icon span {
-            color: var(--cream);
-        }
-
-        .step-title {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            color: var(--espresso);
-            margin-bottom: var(--space-xs);
-        }
-
-        .step-desc {
-            font-size: 0.9rem;
-            color: var(--clay);
-            line-height: 1.7;
-            max-width: 220px;
-            margin: 0 auto;
-        }
-
-        /* ========================================
-           QUOTE SECTION
-        ======================================== */
-        .quote-section {
-            padding: var(--space-2xl) var(--space-lg);
-            background: var(--terracotta);
-            text-align: center;
-        }
-
-        .quote-text {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            font-style: italic;
-            color: var(--cream);
-            max-width: 900px;
-            margin: 0 auto var(--space-md);
-            line-height: 1.4;
-        }
-
-        .quote-author {
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--cream);
-            opacity: 0.7;
-        }
-
-        /* ========================================
-           CONTACT
-        ======================================== */
-        .contact {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 100vh;
-        }
-
-        .contact-info {
-            background: var(--espresso);
-            padding: var(--space-2xl) var(--space-xl);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .contact-label {
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--terracotta-light);
-            margin-bottom: var(--space-md);
-        }
-
-        .contact-title {
-            font-family: var(--font-display);
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 400;
-            line-height: 1.1;
-            color: var(--cream);
-            margin-bottom: var(--space-md);
-        }
-
-        .contact-title em {
-            font-style: italic;
-            color: var(--terracotta-light);
-        }
-
-        .contact-desc {
-            font-size: 1.05rem;
-            color: var(--sand);
-            line-height: 1.8;
-            margin-bottom: var(--space-xl);
-            max-width: 450px;
-        }
-
-        .contact-details {
-            border-top: 1px solid var(--clay);
-            padding-top: var(--space-lg);
-        }
-
-        .contact-item {
-            margin-bottom: var(--space-md);
-        }
-
-        .contact-item-label {
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--terracotta-light);
-            margin-bottom: var(--space-xs);
-        }
-
-        .contact-item-value {
-            font-family: var(--font-display);
-            font-size: 1.3rem;
-            font-style: italic;
-            color: var(--cream);
-        }
-
-        .contact-item-value a {
-            color: inherit;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .contact-item-value a:hover {
-            color: var(--terracotta-light);
-        }
-
-        .contact-form-wrapper {
-            background: var(--cream);
-            padding: var(--space-2xl) var(--space-xl);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .contact-form {
-            max-width: 500px;
-        }
-
-        .form-title {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            font-style: italic;
-            color: var(--espresso);
-            margin-bottom: var(--space-lg);
-        }
-
-        .form-group {
-            margin-bottom: var(--space-md);
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--clay);
-            margin-bottom: var(--space-xs);
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            background: var(--cream-dark);
-            border: none;
-            border-bottom: 2px solid var(--sand);
-            font-family: var(--font-body);
-            font-size: 1rem;
-            color: var(--espresso);
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--terracotta);
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: var(--clay);
-        }
-
-        .form-group select {
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238b5e3c' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-md);
-        }
-
-        .form-submit {
-            width: 100%;
-            padding: 1.2rem;
-            background: var(--terracotta);
-            color: var(--cream);
-            border: none;
-            font-family: var(--font-body);
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.4s var(--ease-out);
-            margin-top: var(--space-sm);
-        }
-
-        .form-submit:hover,
-        .form-submit:focus-visible {
-            background: var(--terracotta-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(196, 112, 75, 0.4);
-        }
-
-        /* ========================================
-           FOOTER
-        ======================================== */
-        footer {
-            background: var(--ink);
-            padding: var(--space-xl) var(--space-lg) var(--space-md);
-        }
-
-        .footer-top {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: var(--space-xl);
-            margin-bottom: var(--space-xl);
-            padding-bottom: var(--space-xl);
-            border-bottom: 1px solid var(--charcoal);
-        }
-
-        .footer-brand {
-            max-width: 350px;
-        }
-
-        .footer-logo {
-            font-family: var(--font-display);
-            font-size: 2.5rem;
-            font-style: italic;
-            color: var(--cream);
-            margin-bottom: var(--space-md);
-        }
-
-        .footer-tagline {
-            font-size: 1rem;
-            color: var(--sand);
-            line-height: 1.7;
-            margin-bottom: var(--space-md);
-        }
-
-        .footer-parent {
-            font-size: 0.8rem;
-            color: var(--clay);
-        }
-
-        .footer-parent span {
-            color: var(--terracotta-light);
-        }
-
-        .footer-section h4 {
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--terracotta-light);
-            margin-bottom: var(--space-md);
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: var(--space-sm);
-        }
-
-        .footer-links a {
-            color: var(--sand);
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--cream);
-        }
-
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: var(--space-sm);
-            font-size: 0.8rem;
-            color: var(--clay);
-        }
-
-        /* ========================================
-           SCROLL ANIMATIONS
-        ======================================== */
-        .reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s var(--ease-out);
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .reveal-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: all 1s var(--ease-out);
-        }
-
-        .reveal-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .reveal-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 1s var(--ease-out);
-        }
-
-        .reveal-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* ========================================
-           RESPONSIVE
-        ======================================== */
-        @media (max-width: 1024px) {
-            .intro {
-                grid-template-columns: 1fr;
-            }
-
-            .intro-right {
-                height: 500px;
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(6, 1fr);
-                grid-auto-rows: 80px;
-            }
-
-            .gallery-item-1 { grid-column: span 6; grid-row: span 4; }
-            .gallery-item-2 { grid-column: span 3; grid-row: span 3; }
-            .gallery-item-3 { grid-column: span 3; grid-row: span 3; }
-            .gallery-item-4 { grid-column: span 3; grid-row: span 2; }
-            .gallery-item-5 { grid-column: span 3; grid-row: span 2; }
-            .gallery-item-6 { grid-column: span 6; grid-row: span 3; }
-
-            .process-timeline {
-                grid-template-columns: repeat(2, 1fr);
-                gap: var(--space-lg);
-            }
-
-            .process-timeline::before {
-                display: none;
-            }
-
-            .contact {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-top {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
+        /* Responsive */
         @media (max-width: 768px) {
-            :root {
-                --space-lg: 3rem;
-                --space-xl: 5rem;
-                --space-2xl: 7rem;
+            .page-wrapper {
+                padding: var(--space-xl) var(--space-md);
             }
 
             nav {
                 padding: var(--space-sm) var(--space-md);
             }
 
-            .nav-links {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: var(--espresso);
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-sm);
+            }
+
+            .controls {
                 flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: var(--space-md);
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.5s var(--ease-out);
-            }
-
-            .nav-links.active {
-                opacity: 1;
-                visibility: visible;
-            }
-
-            .nav-links a {
-                font-size: 1.5rem;
-                color: var(--cream) !important;
-            }
-
-            .menu-btn {
-                display: block;
-            }
-
-            .menu-btn span {
-                background: var(--cream) !important;
-            }
-
-            .hero-content {
-                padding: var(--space-lg) var(--space-md);
-            }
-
-            .intro-left {
-                padding: var(--space-xl) var(--space-md);
-            }
-
-            .intro-stats {
-                flex-direction: column;
-                gap: var(--space-md);
-            }
-
-            .service-card {
-                flex: 0 0 320px;
-            }
-
-            .gallery-grid {
-                grid-template-columns: 1fr;
-                grid-auto-rows: 250px;
-            }
-
-            .gallery-item-1,
-            .gallery-item-2,
-            .gallery-item-3,
-            .gallery-item-4,
-            .gallery-item-5,
-            .gallery-item-6 {
-                grid-column: span 1;
-                grid-row: span 1;
-            }
-
-            .process-timeline {
-                grid-template-columns: 1fr;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-info,
-            .contact-form-wrapper {
-                padding: var(--space-xl) var(--space-md);
-            }
-
-            .footer-top {
-                grid-template-columns: 1fr;
-                gap: var(--space-lg);
             }
         }
 
@@ -1295,368 +411,369 @@
     </style>
 </head>
 <body>
-    <a href="#main" class="skip-link">Skip to main content</a>
     <div class="cursor" id="cursor"></div>
 
     <!-- Navigation -->
-    <nav id="nav">
+    <nav>
         <a href="#" class="nav-logo">Realza</a>
-        
-        <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#process">Process</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+        <span class="nav-tag">Interactive Demo</span>
     </nav>
 
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-image">
-            <img src="https://github.com/user-attachments/assets/8996d772-9a7d-4dda-87ad-1eb34bfda62a" alt="Sculptural marble wall with emerging faces - artistic relief masterpiece by Realza">
-        </div>
-        <div class="hero-overlay"></div>
-        
-        <div class="hero-content">
-            <span class="hero-tag">By Chetak Grani Marmo</span>
-            <h1 class="hero-title">Marble<br><em>Elevated</em></h1>
-            <p class="hero-desc">Where ancient stone meets contemporary vision. Sculptural creations, luxury surfaces, and bespoke spaces for those who see beyond the ordinary.</p>
+    <!-- Main Content -->
+    <div class="page-wrapper">
+        <header class="header">
+            <span class="header-label">Reveal Effect</span>
+            <h1 class="header-title">Discover the <em>Hidden</em></h1>
+            <p class="header-desc">Move your cursor across the surface to unveil the artwork beneath. A metaphor for the transformative power of marble — revealing beauty layer by layer.</p>
+        </header>
+
+        <div class="reveal-section">
+            <div class="reveal-container" id="container">
+                <canvas id="canvas"></canvas>
+                <div class="reveal-badge">
+                    <div class="reveal-badge-text">Interaction</div>
+                    <div class="reveal-badge-value">Mouse Reveal</div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <div class="control-group">
+                    <span class="control-label">Brush: <span id="sizeValue">80</span>px</span>
+                    <input type="range" id="brushSize" min="20" max="200" value="80">
+                </div>
+                
+                <div class="mode-toggle">
+                    <button id="modeCircle" class="btn btn-secondary active">Hard Edge</button>
+                    <button id="modeSoft" class="btn btn-secondary">Soft Edge</button>
+                </div>
+                
+                <button id="resetBtn" class="btn btn-primary">Reset Canvas</button>
+            </div>
         </div>
 
-        <div class="hero-scroll">
-            <span>Scroll</span>
+        <div class="info-section">
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-number">01</div>
+                    <div class="info-label">Hover to Reveal</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-number">02</div>
+                    <div class="info-label">Adjust Brush Size</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-number">03</div>
+                    <div class="info-label">Reset Anytime</div>
+                </div>
+            </div>
         </div>
-    </section>
 
-    <!-- Marquee -->
-    <div class="marquee" aria-hidden="true">
-        <div class="marquee-track">
-            <span class="marquee-item">Luxury Surfaces</span>
-            <span class="marquee-item">Artistic Creations</span>
-            <span class="marquee-item">Bespoke Spaces</span>
-            <span class="marquee-item">CNC Precision</span>
-            <span class="marquee-item">Parametric Art</span>
-            <span class="marquee-item">Custom Furniture</span>
-            <span class="marquee-item">Luxury Surfaces</span>
-            <span class="marquee-item">Artistic Creations</span>
-            <span class="marquee-item">Bespoke Spaces</span>
-            <span class="marquee-item">CNC Precision</span>
-            <span class="marquee-item">Parametric Art</span>
-            <span class="marquee-item">Custom Furniture</span>
+        <div class="instructions">
+            <h3>Integration Guide</h3>
+            <p>
+                To use with your own images, replace <code>BASE_IMAGE</code> and <code>REVEAL_IMAGE</code> 
+                URLs in the script below. Both images should have the same dimensions for best results. 
+                This effect works beautifully for before/after reveals, product showcases, or artistic unveilings.
+            </p>
         </div>
     </div>
 
-    <main id="main">
-        <!-- Intro -->
-        <section class="intro" id="about">
-            <div class="intro-left reveal-left">
-                <span class="intro-label">The Realza Story</span>
-                <h2 class="intro-title">Royalty in<br><em>Every Detail</em></h2>
-                <p class="intro-text">
-                    <strong>Realza</strong> — from the Spanish word for "royalty" — represents the evolution of <strong>Chetak Grani Marmo</strong> from trusted stone suppliers to creators of extraordinary marble artistry.
-                </p>
-                <p class="intro-text">
-                    Where Chetak stands for volume and reliability, Realza embodies emotion, exclusivity, and elevation. We craft pieces that don't just fill spaces — they define them.
-                </p>
-                <div class="intro-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">25+</div>
-                        <div class="stat-label">Years Legacy</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">500+</div>
-                        <div class="stat-label">Projects</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">150+</div>
-                        <div class="stat-label">Partners</div>
-                    </div>
-                </div>
-            </div>
-            <div class="intro-right reveal-right">
-                <img src="https://github.com/user-attachments/assets/7cc59ceb-2dbf-45fc-8044-a4c931a44e12" alt="Parametric wave wall panel - modern architectural marble design" loading="lazy">
-                <div class="intro-badge">
-                    <div class="intro-badge-text">Established</div>
-                    <div class="intro-badge-value">Since 1999</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Services -->
-        <section class="services" id="services">
-            <div class="services-header">
-                <div>
-                    <span class="intro-label" style="color: var(--terracotta-light);">What We Create</span>
-                    <h2 class="services-title">Three Pillars of <em>Excellence</em></h2>
-                </div>
-                <div class="services-nav">
-                    <button id="scrollLeft" aria-label="Scroll left">←</button>
-                    <button id="scrollRight" aria-label="Scroll right">→</button>
-                </div>
-            </div>
-
-            <div class="services-track" id="servicesTrack">
-                <article class="service-card">
-                    <div class="service-image">
-                        <img src="https://github.com/user-attachments/assets/4f1ce530-6782-42ea-96a8-4c1c7ab7f3fb" alt="Marble flamingo relief - nature-inspired artistic panel" loading="lazy">
-                    </div>
-                    <div class="service-content">
-                        <div class="service-number">01</div>
-                        <h3 class="service-title">Luxury Surfaces</h3>
-                        <p class="service-subtitle">Premium Materials</p>
-                        <p class="service-desc">Curated selection of the world's finest marbles. Each slab handpicked for unique veining, color depth, and character that transforms ordinary spaces into extraordinary environments.</p>
-                    </div>
-                </article>
-
-                <article class="service-card">
-                    <div class="service-image">
-                        <img src="https://github.com/user-attachments/assets/b205b7eb-0eae-4f55-bd15-04c02ecab523" alt="CNC carved Bugatti emblem in marble - precision automotive art" loading="lazy">
-                    </div>
-                    <div class="service-content">
-                        <div class="service-number">02</div>
-                        <h3 class="service-title">Designs by Realza</h3>
-                        <p class="service-subtitle">Artistic Creations</p>
-                        <p class="service-desc">CNC-carved panels, parametric artwork, sculptural murals, and bespoke furniture. From devotional pieces to dining tables — art unique to the Indian market.</p>
-                    </div>
-                </article>
-
-                <article class="service-card">
-                    <div class="service-image">
-                        <img src="https://github.com/user-attachments/assets/14db8da6-b988-4531-a241-a7c856e5a251" alt="Organic curved marble installation - flowing architectural feature" loading="lazy">
-                    </div>
-                    <div class="service-content">
-                        <div class="service-number">03</div>
-                        <h3 class="service-title">Spaces by Realza</h3>
-                        <p class="service-subtitle">Complete Design</p>
-                        <p class="service-desc">End-to-end spatial design for mandirs, signature rooms, and statement areas. We integrate marble, client vision, and design expertise into cohesive environments.</p>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- Gallery -->
-        <section class="gallery" id="gallery">
-            <div class="gallery-header reveal">
-                <span class="gallery-label">Selected Works</span>
-                <h2 class="gallery-title">Artistry in Stone</h2>
-            </div>
-
-            <div class="gallery-grid">
-                <div class="gallery-item gallery-item-1">
-                    <img src="https://github.com/user-attachments/assets/8996d772-9a7d-4dda-87ad-1eb34bfda62a" alt="Sculptural marble wall with emerging human faces" loading="lazy">
-                    <div class="gallery-caption">
-                        <h3>Emergence</h3>
-                        <p>Sculptural Wall Art</p>
-                    </div>
-                </div>
-
-                <div class="gallery-item gallery-item-2">
-                    <img src="https://github.com/user-attachments/assets/b205b7eb-0eae-4f55-bd15-04c02ecab523" alt="CNC carved Bugatti emblem" loading="lazy">
-                    <div class="gallery-caption">
-                        <h3>Precision</h3>
-                        <p>CNC Carving</p>
-                    </div>
-                </div>
-
-                <div class="gallery-item gallery-item-3">
-                    <img src="https://github.com/user-attachments/assets/7cc59ceb-2dbf-45fc-8044-a4c931a44e12" alt="Parametric wave wall panel" loading="lazy">
-                    <div class="gallery-caption">
-                        <h3>Wave Form</h3>
-                        <p>Parametric Design</p>
-                    </div>
-                </div>
-
-                <div class="gallery-item gallery-item-4">
-                    <img src="https://github.com/user-attachments/assets/14db8da6-b988-4531-a241-a7c856e5a251" alt="Organic curved marble installation" loading="lazy">
-                    <div class="gallery-caption">
-                        <h3>Organic Flow</h3>
-                        <p>Installation</p>
-                    </div>
-                </div>
-
-                <div class="gallery-item gallery-item-5">
-                    <img src="https://github.com/user-attachments/assets/4f1ce530-6782-42ea-96a8-4c1c7ab7f3fb" alt="Marble flamingo relief" loading="lazy">
-                    <div class="gallery-caption">
-                        <h3>Nature</h3>
-                        <p>Relief Art</p>
-                    </div>
-                </div>
-
-                <div class="gallery-item gallery-item-6">
-                    <img src="https://github.com/user-attachments/assets/248e35e7-75eb-4901-be5e-5cf25b106bcb" alt="Dynamic horse sculpture in marble" loading="lazy">
-                    <div class="gallery-caption">
-                        <h3>Movement</h3>
-                        <p>Dynamic Relief</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Process -->
-        <section class="process" id="process">
-            <div class="process-header reveal">
-                <span class="intro-label">Our Approach</span>
-                <h2 class="process-title">From Vision to Reality</h2>
-            </div>
-
-            <div class="process-timeline">
-                <div class="process-step reveal">
-                    <div class="step-icon"><span>01</span></div>
-                    <h3 class="step-title">Consultation</h3>
-                    <p class="step-desc">Deep dialogue to understand your vision, space, and aesthetic aspirations.</p>
-                </div>
-
-                <div class="process-step reveal">
-                    <div class="step-icon"><span>02</span></div>
-                    <h3 class="step-title">Design</h3>
-                    <p class="step-desc">3D visualization, material selection, and technical drawings that bring concepts to life.</p>
-                </div>
-
-                <div class="process-step reveal">
-                    <div class="step-icon"><span>03</span></div>
-                    <h3 class="step-title">Craft</h3>
-                    <p class="step-desc">Precision CNC machining combined with master artisan finishing for flawless execution.</p>
-                </div>
-
-                <div class="process-step reveal">
-                    <div class="step-icon"><span>04</span></div>
-                    <h3 class="step-title">Install</h3>
-                    <p class="step-desc">White-glove installation by our expert team, ensuring perfection in every detail.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Quote -->
-        <section class="quote-section">
-            <blockquote class="quote-text reveal">
-                "Marble is not just a material — it's a conversation between time and craftsmanship, between nature and human vision."
-            </blockquote>
-            <cite class="quote-author">— The Realza Philosophy</cite>
-        </section>
-
-        <!-- Contact -->
-        <section class="contact" id="contact">
-            <div class="contact-info reveal-left">
-                <span class="contact-label">Get in Touch</span>
-                <h2 class="contact-title">Let's Create<br><em>Something</em><br>Extraordinary</h2>
-                <p class="contact-desc">Whether you're an architect seeking a statement piece, a designer curating luxury spaces, or a connoisseur building your legacy — we're here to transform vision into timeless marble artistry.</p>
-                
-                <div class="contact-details">
-                    <div class="contact-item">
-                        <p class="contact-item-label">Email</p>
-                        <p class="contact-item-value"><a href="mailto:studio@realza.in">studio@realza.in</a></p>
-                    </div>
-                    <div class="contact-item">
-                        <p class="contact-item-label">Studio</p>
-                        <p class="contact-item-value">By Appointment</p>
-                    </div>
-                    <div class="contact-item">
-                        <p class="contact-item-label">Parent Company</p>
-                        <p class="contact-item-value">Chetak Grani Marmo</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="contact-form-wrapper reveal-right">
-                <form class="contact-form" action="#" method="POST">
-                    <h3 class="form-title">Request a Consultation</h3>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" placeholder="Your name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="company">Company</label>
-                            <input type="text" id="company" name="company" placeholder="Your firm">
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="your@email.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone</label>
-                            <input type="tel" id="phone" name="phone" placeholder="+91">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="interest">Interest</label>
-                        <select id="interest" name="interest" required>
-                            <option value="">Select your interest</option>
-                            <option value="surfaces">Luxury Surfaces</option>
-                            <option value="designs">Designs by Realza</option>
-                            <option value="spaces">Spaces by Realza</option>
-                            <option value="custom">Custom Project</option>
-                            <option value="partnership">Design Partnership</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="message">Project Details</label>
-                        <textarea id="message" name="message" placeholder="Tell us about your vision..."></textarea>
-                    </div>
-
-                    <button type="submit" class="form-submit">Send Inquiry</button>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-top">
-            <div class="footer-brand">
-                <div class="footer-logo">Realza</div>
-                <p class="footer-tagline">Marble elevated to art. Luxury surfaces, sculptural creations, and bespoke spaces for visionary architects and designers.</p>
-                <p class="footer-parent">A division of <span>Chetak Grani Marmo (P) Ltd.</span></p>
-            </div>
-
-            <div class="footer-section">
-                <h4>Services</h4>
-                <ul class="footer-links">
-                    <li><a href="#services">Luxury Surfaces</a></li>
-                    <li><a href="#services">Designs by Realza</a></li>
-                    <li><a href="#services">Spaces by Realza</a></li>
-                    <li><a href="#gallery">Portfolio</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h4>Company</h4>
-                <ul class="footer-links">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#process">Process</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h4>Connect</h4>
-                <ul class="footer-links">
-                    <li><a href="mailto:studio@realza.in">studio@realza.in</a></li>
-                    <li><a href="#contact">Request Consultation</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>© 2025 Realza by Chetak Grani Marmo. All rights reserved.</p>
-            <p>Crafted in India</p>
-        </div>
-    </footer>
-
     <script>
+        // ===========================================
+        // CONFIGURATION - Replace with your images!
+        // ===========================================
+        // Use direct image URLs or local paths like '/images/base.png'
+        const BASE_IMAGE = 'https://github.com/user-attachments/assets/8996d772-9a7d-4dda-87ad-1eb34bfda62a';
+        const REVEAL_IMAGE = 'https://github.com/user-attachments/assets/7cc59ceb-2dbf-45fc-8044-a4c931a44e12';
+        
+        // ===========================================
+        // MAIN CODE
+        // ===========================================
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const container = document.getElementById('container');
+        
+        // Create mask canvas (tracks revealed areas)
+        const maskCanvas = document.createElement('canvas');
+        const maskCtx = maskCanvas.getContext('2d');
+        
+        // Image storage
+        let baseImage = null;
+        let revealImage = null;
+        let isLoaded = false;
+        
+        // Settings
+        let brushSize = 80;
+        let brushMode = 'circle'; // 'circle' or 'soft'
+        
+        // Set canvas size
+        function setCanvasSize(width, height) {
+            canvas.width = width;
+            canvas.height = height;
+            maskCanvas.width = width;
+            maskCanvas.height = height;
+        }
+
+        // Create demo images (used when no real images load)
+        function createDemoImages() {
+            const width = 800;
+            const height = 1000;
+            setCanvasSize(width, height);
+            
+            // Create base image - dark marble theme
+            const baseCanvas = document.createElement('canvas');
+            baseCanvas.width = width;
+            baseCanvas.height = height;
+            const baseCtx = baseCanvas.getContext('2d');
+            
+            // Dark gradient background
+            const grad1 = baseCtx.createLinearGradient(0, 0, width, height);
+            grad1.addColorStop(0, '#1a1714');
+            grad1.addColorStop(0.5, '#2c2420');
+            grad1.addColorStop(1, '#0d0b0a');
+            baseCtx.fillStyle = grad1;
+            baseCtx.fillRect(0, 0, width, height);
+            
+            // Add marble-like veins
+            baseCtx.strokeStyle = 'rgba(212, 203, 184, 0.1)';
+            baseCtx.lineWidth = 2;
+            for (let i = 0; i < 15; i++) {
+                baseCtx.beginPath();
+                baseCtx.moveTo(Math.random() * width, 0);
+                baseCtx.bezierCurveTo(
+                    Math.random() * width, height * 0.33,
+                    Math.random() * width, height * 0.66,
+                    Math.random() * width, height
+                );
+                baseCtx.stroke();
+            }
+            
+            // Text
+            baseCtx.fillStyle = '#f8f5f0';
+            baseCtx.font = 'italic 64px "Instrument Serif", Georgia, serif';
+            baseCtx.textAlign = 'center';
+            baseCtx.fillText('Hover to', width/2, height/2 - 40);
+            baseCtx.fillStyle = '#e89b7a';
+            baseCtx.fillText('Reveal', width/2, height/2 + 40);
+            
+            // Create reveal image - warm terracotta theme
+            const revealCanvas = document.createElement('canvas');
+            revealCanvas.width = width;
+            revealCanvas.height = height;
+            const revealCtx = revealCanvas.getContext('2d');
+            
+            // Warm gradient
+            const grad2 = revealCtx.createLinearGradient(0, 0, width, height);
+            grad2.addColorStop(0, '#c4704b');
+            grad2.addColorStop(0.5, '#e89b7a');
+            grad2.addColorStop(1, '#a85a3a');
+            revealCtx.fillStyle = grad2;
+            revealCtx.fillRect(0, 0, width, height);
+            
+            // Add decorative circles
+            revealCtx.fillStyle = 'rgba(248, 245, 240, 0.15)';
+            for (let i = 0; i < 25; i++) {
+                const x = Math.random() * width;
+                const y = Math.random() * height;
+                const size = 30 + Math.random() * 80;
+                revealCtx.beginPath();
+                revealCtx.arc(x, y, size, 0, Math.PI * 2);
+                revealCtx.fill();
+            }
+            
+            // Text
+            revealCtx.fillStyle = '#f8f5f0';
+            revealCtx.font = 'italic 72px "Instrument Serif", Georgia, serif';
+            revealCtx.textAlign = 'center';
+            revealCtx.fillText('Realza', width/2, height/2);
+            revealCtx.font = '600 18px "Syne", sans-serif';
+            revealCtx.letterSpacing = '0.2em';
+            revealCtx.fillText('MARBLE ELEVATED TO ART', width/2, height/2 + 50);
+            
+            // Convert to images
+            baseImage = new Image();
+            revealImage = new Image();
+            
+            baseImage.onload = () => {
+                revealImage.onload = () => {
+                    isLoaded = true;
+                    draw();
+                };
+                revealImage.src = revealCanvas.toDataURL();
+            };
+            baseImage.src = baseCanvas.toDataURL();
+        }
+
+        // Try to load real images, fall back to demo
+        function loadImages() {
+            baseImage = new Image();
+            revealImage = new Image();
+            baseImage.crossOrigin = 'anonymous';
+            revealImage.crossOrigin = 'anonymous';
+            
+            let loadCount = 0;
+            let errorCount = 0;
+            
+            const onLoad = () => {
+                loadCount++;
+                if (loadCount === 2) {
+                    setCanvasSize(baseImage.width, baseImage.height);
+                    isLoaded = true;
+                    draw();
+                }
+            };
+            
+            const onError = () => {
+                errorCount++;
+                if (errorCount >= 1) {
+                    console.log('Image load failed, using demo images');
+                    createDemoImages();
+                }
+            };
+            
+            baseImage.onload = onLoad;
+            revealImage.onload = onLoad;
+            baseImage.onerror = onError;
+            revealImage.onerror = onError;
+            
+            baseImage.src = BASE_IMAGE;
+            revealImage.src = REVEAL_IMAGE;
+            
+            // Timeout fallback
+            setTimeout(() => {
+                if (!isLoaded && errorCount === 0) {
+                    createDemoImages();
+                }
+            }, 5000);
+        }
+
+        // Draw the composited result
+        function draw() {
+            if (!isLoaded) return;
+            
+            // Draw base image
+            ctx.drawImage(baseImage, 0, 0);
+            
+            // Create temp canvas for masked reveal
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = canvas.width;
+            tempCanvas.height = canvas.height;
+            const tempCtx = tempCanvas.getContext('2d');
+            
+            // Draw mask, then reveal image using source-in
+            tempCtx.drawImage(maskCanvas, 0, 0);
+            tempCtx.globalCompositeOperation = 'source-in';
+            tempCtx.drawImage(revealImage, 0, 0);
+            
+            // Draw masked reveal on top
+            ctx.drawImage(tempCanvas, 0, 0);
+        }
+
+        // Paint on mask at position
+        function paint(x, y) {
+            if (!isLoaded) return;
+            
+            if (brushMode === 'soft') {
+                // Soft edge brush using radial gradient
+                const gradient = maskCtx.createRadialGradient(x, y, 0, x, y, brushSize);
+                gradient.addColorStop(0, 'rgba(255,255,255,1)');
+                gradient.addColorStop(0.5, 'rgba(255,255,255,0.5)');
+                gradient.addColorStop(1, 'rgba(255,255,255,0)');
+                maskCtx.fillStyle = gradient;
+                maskCtx.beginPath();
+                maskCtx.arc(x, y, brushSize, 0, Math.PI * 2);
+                maskCtx.fill();
+            } else {
+                // Hard circle brush
+                maskCtx.fillStyle = 'white';
+                maskCtx.beginPath();
+                maskCtx.arc(x, y, brushSize, 0, Math.PI * 2);
+                maskCtx.fill();
+            }
+            
+            draw();
+        }
+
+        // Get position from event (mouse or touch)
+        function getPosition(e) {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            
+            let clientX, clientY;
+            if (e.touches) {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            } else {
+                clientX = e.clientX;
+                clientY = e.clientY;
+            }
+            
+            return {
+                x: (clientX - rect.left) * scaleX,
+                y: (clientY - rect.top) * scaleY
+            };
+        }
+
+        // Event handlers
+        let isDrawing = false;
+
+        container.addEventListener('mousedown', (e) => {
+            isDrawing = true;
+            const pos = getPosition(e);
+            paint(pos.x, pos.y);
+        });
+
+        container.addEventListener('mousemove', (e) => {
+            // Paint on hover (not just drag)
+            const pos = getPosition(e);
+            paint(pos.x, pos.y);
+        });
+
+        container.addEventListener('mouseup', () => isDrawing = false);
+        container.addEventListener('mouseleave', () => isDrawing = false);
+
+        // Touch support
+        container.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            isDrawing = true;
+            const pos = getPosition(e);
+            paint(pos.x, pos.y);
+        });
+
+        container.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            if (isDrawing) {
+                const pos = getPosition(e);
+                paint(pos.x, pos.y);
+            }
+        });
+
+        container.addEventListener('touchend', () => isDrawing = false);
+
+        // Controls
+        document.getElementById('brushSize').addEventListener('input', (e) => {
+            brushSize = parseInt(e.target.value);
+            document.getElementById('sizeValue').textContent = brushSize;
+        });
+
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            maskCtx.clearRect(0, 0, maskCanvas.width, maskCanvas.height);
+            draw();
+        });
+
+        document.getElementById('modeCircle').addEventListener('click', () => {
+            brushMode = 'circle';
+            document.getElementById('modeCircle').classList.add('active');
+            document.getElementById('modeSoft').classList.remove('active');
+        });
+
+        document.getElementById('modeSoft').addEventListener('click', () => {
+            brushMode = 'soft';
+            document.getElementById('modeSoft').classList.add('active');
+            document.getElementById('modeCircle').classList.remove('active');
+        });
+
         // Custom cursor
         const cursor = document.getElementById('cursor');
         let cursorX = 0, cursorY = 0;
@@ -1677,101 +794,14 @@
             }
             animateCursor();
 
-            document.querySelectorAll('a, button, .gallery-item, .service-card').forEach(el => {
+            document.querySelectorAll('a, button, .reveal-container').forEach(el => {
                 el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
                 el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
             });
         }
 
-        // Mobile menu
-        const menuBtn = document.getElementById('menuBtn');
-        const navLinks = document.getElementById('navLinks');
-
-        menuBtn.addEventListener('click', () => {
-            const isActive = navLinks.classList.toggle('active');
-            menuBtn.classList.toggle('active');
-            menuBtn.setAttribute('aria-expanded', isActive);
-        });
-
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                menuBtn.classList.remove('active');
-            });
-        });
-
-        // Nav color change based on section
-        const nav = document.getElementById('nav');
-        const heroSection = document.querySelector('.hero');
-
-        function updateNavColor() {
-            const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-            if (window.scrollY > heroBottom - 100) {
-                nav.classList.add('light-mode');
-            } else {
-                nav.classList.remove('light-mode');
-            }
-        }
-
-        window.addEventListener('scroll', updateNavColor);
-        updateNavColor();
-
-        // Services horizontal scroll
-        const servicesTrack = document.getElementById('servicesTrack');
-        const scrollLeftBtn = document.getElementById('scrollLeft');
-        const scrollRightBtn = document.getElementById('scrollRight');
-
-        scrollLeftBtn.addEventListener('click', () => {
-            servicesTrack.scrollBy({ left: -420, behavior: 'smooth' });
-        });
-
-        scrollRightBtn.addEventListener('click', () => {
-            servicesTrack.scrollBy({ left: 420, behavior: 'smooth' });
-        });
-
-        // Scroll reveal
-        const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-        
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-
-        revealElements.forEach(el => revealObserver.observe(el));
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href === '#') return;
-                
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) {
-                    const offset = 80;
-                    const targetPosition = target.offsetTop - offset;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Escape closes menu
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                menuBtn.classList.remove('active');
-            }
-        });
+        // Initialize
+        loadImages();
     </script>
 </body>
 </html>
